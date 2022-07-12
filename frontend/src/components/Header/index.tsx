@@ -10,7 +10,7 @@ function Header() {
                 <p>Desenvolvido por <a target="_blank"  href="https://google.com">Icaro</a></p>
             </div>
         </header>
-    )
+    );
   }
   
   export default Header;
