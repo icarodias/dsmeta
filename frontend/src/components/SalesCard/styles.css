@@ -1,0 +1,97 @@
+.card{
+    background-color: #283142;
+    border-radius: 10px;
+    padding:30px 10px;
+}
+
+h2{
+    color:#676FFF;
+    margin-bottom: 20px;
+}
+
+.form-control-container{
+    margin-bottom:16px;
+    max-width: 300px;
+}
+
+.form-control{
+    height:46px;
+    border-radius: 5px;
+    width:100%;
+    border:1px solid #384459;
+    background-color: #182531;
+    color:#9AAABE;
+    padding: 0 20px;
+    font-size:18px; 
+}
+
+.sales-table{
+    width:100%;
+    border-spacing:0;
+    border-collapse: collapse;
+}
+.sales-table thead{
+    height:55px;
+    font-size: 16px;
+    font-weight: 700;
+    color:#E9E9E9;
+}
+.sales-table tbody{
+    font-size:14px;
+    font-weight: 400;
+    color:#CFCFCF;
+    text-align: center;
+
+}
+
+.sales-table tbody tr {
+    height:74px;
+    border-top: 1px solid #5F6E82;
+
+}
+
+.sales-table tbody tr:hover > td{
+    background-color: #384459;
+
+}
+
+.sales-table tbody tr:nth-child(odd) {
+    background-color: #242C3B;
+
+}
+.red-button-container{
+    display: flex;
+    justify-content:center;
+}
+
+.show-major-576-width{
+    display: none;
+
+}
+
+.show-major-992-width{
+    display: none;
+
+}
+
+@media (min-width:576px) {
+    .show-major-576-width{
+        display: table-cell;
+    }
+    .card{
+        padding:30px 35px;
+    }
+    .sales-table tbody tr {
+        height:55px;
+    }
+    .sales-table tbody{
+        font-size: 18px;
+    }
+
+}
+
+@media (min-width:992px) {
+    .show-major-992-width{
+        display: table-cell;
+    }
+}
