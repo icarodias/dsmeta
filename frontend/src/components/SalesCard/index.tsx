@@ -22,12 +22,18 @@ function SalesCard() {
 
     //  useEffect always this component is used, this function will run
     useEffect(()=>{
+
+        const formatedMinDate = minDate.toISOString().slice(0,10);
+
+        const formatedMaxDate = maxDate.toISOString().slice(0,10);
+
+
         //connect to backend
-        axios.get(`${BASE_URL}/sales`)
+        axios.get(`${BASE_URL}/sales?minDate=${formatedMinDate}&maxDate=${formatedMaxDate}`)
         .then((response)=>{
             setSales(response.data.content);
         })
-    },[]);
+    },[minDate,maxDate]);
 
     return(
         <div className="card">
