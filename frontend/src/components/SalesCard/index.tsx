@@ -5,6 +5,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {BASE_URL} from "../../utils/request"
+import { Sale } from "../../models/sale";
 
 
 function SalesCard() {
@@ -15,12 +17,15 @@ function SalesCard() {
     const [minDate,setMinDate] = useState(min);
     const [maxDate,setMaxDate] = useState(new Date());
 
+    // typinf useState list of Sale = <Sale[]>
+    const [sales, setSales] = useState<Sale[]>( [] );
 
+    //  useEffect always this component is used, this function will run
     useEffect(()=>{
         //connect to backend
-        axios.get("http://localhost:8080/sales")
+        axios.get(`${BASE_URL}/sales`)
         .then((response)=>{
-            console.log(response.data);
+            setSales(response.data.content);
         })
     },[]);
 
@@ -65,45 +70,25 @@ function SalesCard() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className="show-major-992-width">#341</td>
-                                    <td className="show-major-576-width">08/08/2020</td>
-                                    <td>Anakin</td>
-                                    <td className="show-major-992-width">15</td>
-                                    <td className="show-major-992-width">11</td>
-                                    <td>R$ 55300.00</td>
-                                    <td>
-                                        <div className="red-button-container">
-                                            <NotificationButton/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="show-major-992-width">#341</td>
-                                    <td className="show-major-576-width">08/08/2020</td>
-                                    <td>Anakin</td>
-                                    <td className="show-major-992-width">15</td>
-                                    <td className="show-major-992-width">11</td>
-                                    <td>R$ 55300.00</td>
-                                    <td>
-                                        <div className="red-button-container">
-                                            <NotificationButton/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="show-major-992-width">#341</td>
-                                    <td className="show-major-576-width">08/08/2020</td>
-                                    <td>Anakin</td>
-                                    <td className="show-major-992-width">15</td>
-                                    <td className="show-major-992-width">11</td>
-                                    <td>R$ 55300.00</td>
-                                    <td>
-                                        <div className="red-button-container">
-                                            <NotificationButton/>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {/* expression react */
+                                sales.map( sale =>{
+                                    return(
+                                        <tr key={sale.id}>
+                                            <td className="show-major-992-width">{sale.id}</td>
+                                            <td className="show-major-576-width">{new Date(sale.date).toLocaleDateString()}</td>
+                                            <td>{sale.sellerName}</td>
+                                            <td className="show-major-992-width">{sale.visited}</td>
+                                            <td className="show-major-992-width">{sale.deals}</td>
+                                            <td>R$ {sale.amount.toFixed(2)}</td>
+                                            <td>
+                                                <div className="red-button-container">
+                                                    <NotificationButton/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    );
+                                })
+                                }
                             </tbody>
                         </table>
                     </div>
